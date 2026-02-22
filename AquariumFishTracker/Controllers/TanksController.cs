@@ -48,15 +48,6 @@ namespace AquariumFishTracker.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Tank tank)
         {
-            // DEBUG: See if the POST is hit and why validation fails
-            Console.WriteLine("POST Create HIT");
-            Console.WriteLine("ModelState Valid: " + ModelState.IsValid);
-
-            foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
-            {
-                Console.WriteLine("ERROR: " + error.ErrorMessage);
-            }
-
             if (ModelState.IsValid)
             {
                 _context.Add(tank);
@@ -64,9 +55,11 @@ namespace AquariumFishTracker.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
+            ViewData["Title"] = "Create Tank";
+            ViewData["Action"] = "Create";
+
             return View(tank);
         }
-
 
         // GET: Tanks/Edit/5
         public async Task<IActionResult> Edit(int? id)

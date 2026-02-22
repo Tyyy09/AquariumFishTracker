@@ -14,6 +14,7 @@
 
         public DateTime? LastCleanedDate { get; set; }
 
+        // Relationship
         public List<Fish> Fish { get; set; } = new();
     }
 }
