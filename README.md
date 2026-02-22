@@ -8,8 +8,6 @@ The purpose of this project is to demonstrate core MVC concepts including:
 - Controllers and Views  
 - CRUD operations  
 - SQL Server database integration  
-- Basic authentication using Individual User Accounts  
-
 ---
 
 ## Project Description
