@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AquariumFishTracker.Data;
 using AquariumFishTracker.Models;
-
+// This controller manages CRUD operations for Fish entities, including listing, creating, editing, and deleting fish records. It also handles the association between fish and their respective tanks.
 namespace AquariumFishTracker.Controllers
 {
     public class FishController : Controller

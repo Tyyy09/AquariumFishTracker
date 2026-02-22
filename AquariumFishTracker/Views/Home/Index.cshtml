@@ -1,7 +1,34 @@
 ﻿@{
+    ViewData["Title"] = "Home";
+}
+<!--Redesign HomePage-->
+<div class="container mt-5">
+    <div class="card shadow-sm border-0">
+        <div class="card-body text-center p-5">
+
+            <h1 class="display-4 mb-3 text-primary">Welcome to AquariumFishTracker</h1>
+
+            <p class="lead">
+                AquariumFishTracker is a simple ASP.NET Core MVC application that helps users
+                manage aquarium tanks and the fish that live in them. You can create, view,
+                update, and delete tank records, as well as track the fish associated with each tank.
+            </p>
+
+            <hr class="my-4" />
+
+            <p class="text-muted">
+                This project demonstrates core MVC concepts including models, controllers, views,
+                database integration, and CRUD operations using SQL Server.
+            </p>
+
+        </div>
+    </div>
+</div>
+
+<!--Adding Traking Dashboard-->
+@{
     ViewData["Title"] = "Dashboard";
 }
-
 <div class="container mt-4">
 
     <h1 class="mb-4 text-center fw-bold">Aquarium Dashboard</h1>
