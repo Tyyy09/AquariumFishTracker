@@ -31,5 +31,3 @@ This creates a **one-to-many relationship**:
 **One Tank -> Many Fish**
 
 Users can create, view, edit, and delete both tanks and fish.
-2. Open the solution in Visual Studio  
-3. Update the database using:
