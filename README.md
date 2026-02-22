@@ -28,7 +28,7 @@ Represents an aquarium tank with properties such as:
 ### **Fish**
 Represents a fish that belongs to a specific tank.  
 This creates a **one-to-many relationship**:  
-**One Tank → Many Fish**
+**One Tank -> Many Fish**
 
 Users can create, view, edit, and delete both tanks and fish.
 2. Open the solution in Visual Studio  
