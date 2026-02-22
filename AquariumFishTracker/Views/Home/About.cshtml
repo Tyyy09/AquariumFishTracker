@@ -1,0 +1,48 @@
+﻿@{
+    ViewData["Title"] = "About";
+}
+
+<div class="container mt-5">
+
+    <!-- Header -->
+    <div class="text-center mb-5">
+        <h1 class="fw-bold display-6">About Aquarium Fish Tracker</h1>
+        <p class="text-muted fs-5">
+            A simple and organized way to manage your aquarium fish and tank parameters.
+        </p>
+    </div>
+
+    <!-- Main Card -->
+    <div class="card shadow-sm mb-4">
+        <div class="card-body p-4">
+            <h3 class="card-title mb-3">What Is This Application?</h3>
+            <p class="card-text">
+                The <strong>Aquarium Fish Tracker</strong> is an ASP.NET Core MVC web application
+                designed to help aquarium hobbyists keep track of their fish species and monitor
+                important tank conditions. It provides an easy way to record fish details,
+                assign them to tanks, and maintain healthy water environments.
+            </p>
+        </div>
+    </div>
+
+    <!-- Features Card -->
+    <div class="card shadow-sm mb-4">
+        <div class="card-body p-4">
+            <h3 class="card-title mb-3">Key Features</h3>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Track fish species and characteristics</li>
+                <li class="list-group-item">Monitor tank parameters (pH, temperature, ammonia, etc.)</li>
+                <li class="list-group-item">Assign fish to specific tanks</li>
+                <li class="list-group-item">View tank health at a glance</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Back Button -->
+    <div class="text-center mt-4 mb-5">
+        <a asp-controller="Home" asp-action="Index" class="btn btn-primary px-4">
+            Back to Home
+        </a>
+    </div>
+
+</div>

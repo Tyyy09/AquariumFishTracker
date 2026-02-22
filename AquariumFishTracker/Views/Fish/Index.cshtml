@@ -1,0 +1,53 @@
+﻿@model IEnumerable<AquariumFishTracker.Models.Fish>
+
+@{
+    ViewData["Title"] = "Fish";
+}
+
+<div class="container mt-4">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="fw-bold">Fish</h1>
+        <a asp-action="Create" class="btn btn-primary">Add New Fish</a>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-body p-0">
+
+            <table class="table table-striped mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th>Name</th>
+                        <th>Species</th>
+                        <th>Length (cm)</th>
+                        <th>Weight (g)</th>
+                        <th>Tank</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var fish in Model)
+                    {
+                        <tr>
+                            <td>@fish.Name</td>
+                            <td>@fish.Species</td>
+                            <td>@fish.LengthCm</td>
+                            <td>@fish.WeightGrams</td>
+                            <td>
+                                @(fish.Tank?.Name ?? "Unassigned")
+                            </td>
+
+                            <td class="text-end">
+                                <a asp-action="Details" asp-route-id="@fish.Id" class="btn btn-sm btn-outline-secondary">Details</a>
+                                <a asp-action="Edit" asp-route-id="@fish.Id" class="btn btn-sm btn-outline-primary">Edit</a>
+                                <a asp-action="Delete" asp-route-id="@fish.Id" class="btn btn-sm btn-outline-danger">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+</div>

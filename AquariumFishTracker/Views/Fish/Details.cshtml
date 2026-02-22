@@ -1,0 +1,29 @@
+﻿@model AquariumFishTracker.Models.Fish
+
+<div class="container mt-4">
+
+    <h1 class="fw-bold mb-4">Fish Details</h1>
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+
+            <h3 class="card-title">@Model.Name</h3>
+            <p class="text-muted">@Model.Species</p>
+
+            <hr />
+
+            <p><strong>Length:</strong> @Model.LengthCm cm</p>
+            <p><strong>Weight:</strong> @Model.WeightGrams g</p>
+            <p><strong>Date Added:</strong> @Model.DateAdded.ToShortDateString()</p>
+
+            <p><strong>Tank:</strong> @(Model.Tank?.Name ?? "Unassigned")</p>
+
+        </div>
+
+        <div class="card-footer bg-white text-end">
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
+            <a asp-action="Index" class="btn btn-secondary">Back</a>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,49 @@
+﻿@model AquariumFishTracker.Models.Tank
+
+<div class="container mt-4">
+
+    <h1 class="fw-bold mb-4">Tank Details</h1>
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+
+            <h3 class="card-title">@Model.Name</h3>
+            <p class="text-muted">Volume: @Model.VolumeLiters L</p>
+
+            <hr />
+
+            <p><strong>Temperature:</strong> @Model.TemperatureC °C</p>
+            <p><strong>pH:</strong> @Model.PH</p>
+            <p><strong>Ammonia:</strong> @Model.Ammonia</p>
+            <p><strong>Nitrite:</strong> @Model.Nitrite</p>
+            <p><strong>Nitrate:</strong> @Model.Nitrate</p>
+
+            <p><strong>Last Cleaned:</strong> @(Model.LastCleanedDate?.ToShortDateString() ?? "Not recorded")</p>
+
+            <hr />
+
+            <h5 class="fw-bold">Fish in this tank</h5>
+
+            @if (Model.Fish != null && Model.Fish.Any())
+            {
+                <ul>
+                    @foreach (var fish in Model.Fish)
+                    {
+                        <li>@fish.Name (@fish.Species)</li>
+                    }
+                </ul>
+            }
+            else
+            {
+                <p class="text-muted">No fish assigned to this tank.</p>
+            }
+
+        </div>
+
+        <div class="card-footer bg-white text-end">
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
+            <a asp-action="Index" class="btn btn-secondary">Back</a>
+        </div>
+    </div>
+
+</div>

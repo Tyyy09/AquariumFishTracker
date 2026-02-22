@@ -1,0 +1,49 @@
+﻿@model IEnumerable<AquariumFishTracker.Models.Tank>
+
+@{
+    ViewData["Title"] = "Tanks";
+}
+
+<div class="container mt-4">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="fw-bold">Tanks</h1>
+        <a asp-action="Create" class="btn btn-success">Add New Tank</a>
+    </div>
+
+    <div class="row g-4">
+
+        @foreach (var tank in Model)
+        {
+            <div class="col-md-4">
+                <div class="card shadow-sm h-100">
+
+                    <div class="card-body">
+                        <h4 class="card-title">@tank.Name</h4>
+
+                        <p class="text-muted mb-1">Volume: @tank.VolumeLiters L</p>
+                        <p class="text-muted mb-1">Temperature: @tank.TemperatureC °C</p>
+                        <p class="text-muted mb-1">pH: @tank.PH</p>
+                        <p class="text-muted mb-1">Ammonia: @tank.Ammonia</p>
+                        <p class="text-muted mb-1">Nitrite: @tank.Nitrite</p>
+                        <p class="text-muted mb-1">Nitrate: @tank.Nitrate</p>
+
+                        <p class="mt-2">
+                            <strong>Last Cleaned:</strong>
+                            @(tank.LastCleanedDate?.ToShortDateString() ?? "Not recorded")
+                        </p>
+                    </div>
+
+                    <div class="card-footer bg-white text-end">
+                        <a asp-action="Details" asp-route-id="@tank.Id" class="btn btn-sm btn-outline-secondary">Details</a>
+                        <a asp-action="Edit" asp-route-id="@tank.Id" class="btn btn-sm btn-outline-primary">Edit</a>
+                        <a asp-action="Delete" asp-route-id="@tank.Id" class="btn btn-sm btn-outline-danger">Delete</a>
+                    </div>
+
+                </div>
+            </div>
+        }
+
+    </div>
+
+</div>

@@ -1,0 +1,65 @@
+﻿@model AquariumFishTracker.Models.Tank
+
+@{
+    ViewData["Title"] = "Create Tank";
+}
+
+<div class="container mt-4">
+
+    <h1 class="fw-bold mb-4">Create Tank</h1>
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+
+            <form asp-action="Create">
+
+                <div class="mb-3">
+                    <label asp-for="Name" class="form-label"></label>
+                    <input asp-for="Name" class="form-control" />
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="VolumeLiters" class="form-label"></label>
+                    <input asp-for="VolumeLiters" class="form-control" />
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="TemperatureC" class="form-label"></label>
+                    <input asp-for="TemperatureC" class="form-control" />
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="PH" class="form-label"></label>
+                    <input asp-for="PH" class="form-control" />
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Ammonia" class="form-label"></label>
+                    <input asp-for="Ammonia" class="form-control" />
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Nitrite" class="form-label"></label>
+                    <input asp-for="Nitrite" class="form-control" />
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Nitrate" class="form-label"></label>
+                    <input asp-for="Nitrate" class="form-control" />
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="LastCleanedDate" class="form-label"></label>
+                    <input asp-for="LastCleanedDate" class="form-control" type="date" />
+                </div>
+
+                <button type="submit" class="btn btn-success">Save</button>
+                <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+                <div asp-validation-summary="All" class="text-danger mb-3"></div>
+
+            </form>
+
+        </div>
+    </div>
+
+</div>

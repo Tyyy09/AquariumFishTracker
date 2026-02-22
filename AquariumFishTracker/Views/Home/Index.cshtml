@@ -1,0 +1,46 @@
+﻿@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="container mt-4">
+
+    <h1 class="mb-4 text-center fw-bold">Aquarium Dashboard</h1>
+
+    <div class="row g-4">
+
+        <div class="col-md-3">
+            <div class="card shadow-sm text-center p-3">
+                <h4>Total Fish</h4>
+                <p class="display-6">@ViewBag.TotalFish</p>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow-sm text-center p-3">
+                <h4>Total Tanks</h4>
+                <p class="display-6">@ViewBag.TotalTanks</p>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow-sm text-center p-3">
+                <h4>Average pH</h4>
+                <p class="display-6">@ViewBag.AvgPH.ToString("0.0")</p>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow-sm text-center p-3">
+                <h4>Tanks Needing Cleaning</h4>
+                <p class="display-6">@ViewBag.TanksNeedingCleaning</p>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="text-center mt-4">
+        <a asp-controller="Fish" asp-action="Create" class="btn btn-primary me-2">Add Fish</a>
+        <a asp-controller="Tanks" asp-action="Create" class="btn btn-success">Add Tank</a>
+    </div>
+
+</div>
