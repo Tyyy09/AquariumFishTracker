@@ -1,47 +1,70 @@
 ﻿@model AquariumFishTracker.Models.Fish
 
-<div class="container mt-4">
+@{
+    ViewData["Title"] = "Create Fish";
+}
+
+<div class="container mt-4" style="max-width:560px;">
 
     <h1 class="fw-bold mb-4">Create Fish</h1>
 
-    <div class="card shadow-sm">
-        <div class="card-body">
+    <div class="card shadow-sm border-0">
+        <div class="card-body p-4">
 
             <form asp-action="Create">
+                <div asp-validation-summary="All" class="text-danger mb-3"></div>
 
                 <div class="mb-3">
-                    <label asp-for="Name" class="form-label"></label>
-                    <input asp-for="Name" class="form-control" />
+                    <label asp-for="Name" class="form-label fw-semibold"></label>
+                    <input asp-for="Name" class="form-control" placeholder="e.g. Nemo" />
+                    <span asp-validation-for="Name" class="text-danger small"></span>
                 </div>
 
                 <div class="mb-3">
-                    <label asp-for="Species" class="form-label"></label>
-                    <input asp-for="Species" class="form-control" />
+                    <label asp-for="Species" class="form-label fw-semibold"></label>
+                    <input asp-for="Species" class="form-control" placeholder="e.g. Clownfish" />
+                    <span asp-validation-for="Species" class="text-danger small"></span>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col">
+                        <label asp-for="LengthCm" class="form-label fw-semibold"></label>
+                        <input asp-for="LengthCm" class="form-control" placeholder="cm" />
+                        <span asp-validation-for="LengthCm" class="text-danger small"></span>
+                    </div>
+                    <div class="col">
+                        <label asp-for="WeightGrams" class="form-label fw-semibold"></label>
+                        <input asp-for="WeightGrams" class="form-control" placeholder="grams" />
+                        <span asp-validation-for="WeightGrams" class="text-danger small"></span>
+                    </div>
                 </div>
 
                 <div class="mb-3">
-                    <label asp-for="LengthCm" class="form-label"></label>
-                    <input asp-for="LengthCm" class="form-control" />
+                    <label asp-for="DateAdded" class="form-label fw-semibold"></label>
+                    <input asp-for="DateAdded" class="form-control" type="date" />
                 </div>
 
-                <div class="mb-3">
-                    <label asp-for="WeightGrams" class="form-label"></label>
-                    <input asp-for="WeightGrams" class="form-control" />
-                </div>
-
-                <div class="mb-3">
-                    <label asp-for="TankId" class="form-label">Tank</label>
+                <div class="mb-4">
+                    <label asp-for="TankId" class="form-label fw-semibold">Tank</label>
                     <select asp-for="TankId" asp-items="ViewBag.TankId" class="form-select">
                         <option value="">-- Select Tank --</option>
                     </select>
+                    <span asp-validation-for="TankId" class="text-danger small"></span>
                 </div>
 
-                <button type="submit" class="btn btn-primary">Save</button>
-                <a asp-action="Index" class="btn btn-secondary">Cancel</a>
-
+                <div class="d-flex gap-2">
+                    <button type="submit" class="btn btn-success">Save Fish</button>
+                    <a asp-action="Index" class="btn btn-outline-secondary">Cancel</a>
+                </div>
             </form>
 
         </div>
     </div>
 
 </div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

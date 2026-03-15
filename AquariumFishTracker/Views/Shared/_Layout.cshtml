@@ -10,16 +10,21 @@
     <link rel="stylesheet" href="~/AquariumFishTracker.styles.css" asp-append-version="true" />
 </head>
 
-<body>
+<body style="background:#f5f7fa; min-height:100vh; display:flex; flex-direction:column;">
+
     <header>
-        <nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-dark mb-3"
+             style="background:#042C53; box-shadow:0 2px 8px rgba(0,0,0,0.15);">
             <div class="container-fluid">
 
-                <a class="navbar-brand" asp-controller="Home" asp-action="Index">
+                <!-- Brand -->
+                <a class="navbar-brand fw-bold" asp-controller="Home" asp-action="Index"
+                       style="color:#5DCAA5; letter-spacing:0.03em;">
                     AquariumFishTracker
                 </a>
 
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                <button class="navbar-toggler" type="button"
+                        data-bs-toggle="collapse"
                         data-bs-target=".navbar-collapse">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -28,24 +33,28 @@
                     <ul class="navbar-nav flex-grow-1">
 
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-
-                        <!-- adding two para tank and fish-->
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Tanks" asp-action="Index">Tanks</a>
+                            <a class="nav-link" asp-controller="Home" asp-action="Index"
+                               style="color:#B5D4F4;">Home</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Fish" asp-action="Index">Fish</a>
+                            <a class="nav-link" asp-controller="Tanks" asp-action="Index"
+                               style="color:#B5D4F4;">Tanks</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Home" asp-action="About">About</a>
+                            <a class="nav-link" asp-controller="Fish" asp-action="Index"
+                               style="color:#B5D4F4;">Fish</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link" asp-controller="Home" asp-action="About"
+                               style="color:#B5D4F4;">About</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Home" asp-action="Privacy"
+                               style="color:#B5D4F4;">Privacy</a>
                         </li>
 
                     </ul>
@@ -57,21 +66,20 @@
         </nav>
     </header>
 
-    <div class="container">
+    <div class="container flex-grow-1">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
+    <footer style="background:#042C53; color:#85B7EB; padding:1rem 0; margin-top:2rem;">
+        <div class="container" style="font-size:13px;">
             &copy; 2026 - AquariumFishTracker |
-            Created by: <strong>Ichty Te</strong> |
-            Student #: <strong>200626964</strong> |
+            Created by: <strong style="color:#5DCAA5;">Ichty Te</strong> |
+            Student #: <strong style="color:#fff;">200626964</strong> |
             COMP 2084 – Server-Side Scripting
         </div>
     </footer>
-
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

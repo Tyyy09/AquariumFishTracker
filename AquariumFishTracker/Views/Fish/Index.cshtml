@@ -7,47 +7,50 @@
 <div class="container mt-4">
 
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1 class="fw-bold">Fish</h1>
-        <a asp-action="Create" class="btn btn-primary">Add New Fish</a>
+        <div>
+            <h1 class="fw-bold mb-0">Fish</h1>
+            <p class="text-muted mb-0" style="font-size:13px;">All fish across your tanks</p>
+        </div>
+        <a asp-action="Create" class="btn btn-success">+ Add Fish</a>
     </div>
 
-    <div class="card shadow-sm">
+    <div class="card border-0 shadow-sm">
         <div class="card-body p-0">
-            <!--Style the table-->
-            <table class="table table-striped mb-0">
-                <thead class="table-light">
-                    <tr>
-                        <th>Name</th>
-                        <th>Species</th>
-                        <th>Length (cm)</th>
-                        <th>Weight (g)</th>
-                        <th>Tank</th>
-                        <th></th>
+            <table class="table mb-0" style="font-size:14px;">
+                <thead>
+                    <tr style="background:#042C53; color:#B5D4F4; font-size:11px; text-transform:uppercase; letter-spacing:0.08em;">
+                        <th style="padding:14px 16px; font-weight:500; border:none;">Name</th>
+                        <th style="padding:14px 16px; font-weight:500; border:none;">Species</th>
+                        <th style="padding:14px 16px; font-weight:500; border:none;">Length (cm)</th>
+                        <th style="padding:14px 16px; font-weight:500; border:none;">Weight (g)</th>
+                        <th style="padding:14px 16px; font-weight:500; border:none;">Tank</th>
+                        <th style="padding:14px 16px; font-weight:500; border:none;">Date Added</th>
+                        <th style="padding:14px 16px; border:none;"></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <!--Loop through the fish and display their details in the table-->
                     @foreach (var fish in Model)
                     {
-                        <tr>
-                            <td>@fish.Name</td>
-                            <td>@fish.Species</td>
-                            <td>@fish.LengthCm</td>
-                            <td>@fish.WeightGrams</td>
-                            <td>
-                                @(fish.Tank?.Name ?? "Unassigned")
+                        <tr style="border-bottom:0.5px solid #f0f0f0;">
+                            <td style="padding:14px 16px; font-weight:500; color:#111;">@fish.Name</td>
+                            <td style="padding:14px 16px; color:#555;">@fish.Species</td>
+                            <td style="padding:14px 16px; color:#555;">@fish.LengthCm</td>
+                            <td style="padding:14px 16px; color:#555;">@fish.WeightGrams</td>
+                            <td style="padding:14px 16px;">
+                                <span style="background:#E1F5EE; color:#0F6E56; font-size:12px; padding:3px 10px; border-radius:20px; font-weight:500;">
+                                    @(fish.Tank?.Name ?? "Unassigned")
+                                </span>
                             </td>
-
-                            <td class="text-end">
-                                <a asp-action="Details" asp-route-id="@fish.Id" class="btn btn-sm btn-outline-secondary">Details</a>
-                                <a asp-action="Edit" asp-route-id="@fish.Id" class="btn btn-sm btn-outline-primary">Edit</a>
+                            <td style="padding:14px 16px; color:#888; font-size:13px;">@fish.DateAdded.ToShortDateString()</td>
+                            <td style="padding:14px 16px; text-align:right;">
+                                <a asp-action="Details" asp-route-id="@fish.Id" class="btn btn-sm btn-outline-secondary me-1">Details</a>
+                                <a asp-action="Edit" asp-route-id="@fish.Id" class="btn btn-sm btn-outline-primary me-1">Edit</a>
                                 <a asp-action="Delete" asp-route-id="@fish.Id" class="btn btn-sm btn-outline-danger">Delete</a>
                             </td>
                         </tr>
                     }
                 </tbody>
             </table>
-
         </div>
     </div>
 

@@ -7,43 +7,68 @@
 <div class="container mt-4">
 
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1 class="fw-bold">Tanks</h1>
-        <a asp-action="Create" class="btn btn-success">Add New Tank</a>
+        <div>
+            <h1 class="fw-bold mb-0">Tanks</h1>
+            <p class="text-muted mb-0" style="font-size:13px;">All registered aquarium tanks</p>
+        </div>
+        <a asp-action="Create" class="btn btn-success">+ Add Tank</a>
     </div>
 
-    <div class="row g-4">
-
+    <div class="row g-3">
         @foreach (var tank in Model)
         {
+            <!-- cleaning badge logic: flagged if null or older than 14 days -->
+            var needsCleaning = tank.LastCleanedDate == null || tank.LastCleanedDate < DateTime.Now.AddDays(-14);
+
             <div class="col-md-4">
-                <div class="card shadow-sm h-100">
-                    <!--style the tank card-->
-                    <div class="card-body">
-                        <h4 class="card-title">@tank.Name</h4>
+                <div class="card border-0 shadow-sm h-100" style="border-top:3px solid #185FA5 !important; border-radius:12px;">
+                    <div class="card-body p-4">
 
-                        <p class="text-muted mb-1">Volume: @tank.VolumeLiters L</p>
-                        <p class="text-muted mb-1">Temperature: @tank.TemperatureC °C</p>
-                        <p class="text-muted mb-1">pH: @tank.PH</p>
-                        <p class="text-muted mb-1">Ammonia: @tank.Ammonia</p>
-                        <p class="text-muted mb-1">Nitrite: @tank.Nitrite</p>
-                        <p class="text-muted mb-1">Nitrate: @tank.Nitrate</p>
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <h4 class="fw-bold mb-0" style="color:#042C53;">@tank.Name</h4>
+                            @if (needsCleaning)
+                            {
+                                <span style="background:#FCEBEB; color:#A32D2D; font-size:11px; padding:3px 10px; border-radius:20px; font-weight:500;">Needs Cleaning</span>
+                            }
+                            else
+                            {
+                                <span style="background:#E1F5EE; color:#0F6E56; font-size:11px; padding:3px 10px; border-radius:20px; font-weight:500;">Clean</span>
+                            }
+                        </div>
 
-                        <p class="mt-2">
-                            <strong>Last Cleaned:</strong>
-                            @(tank.LastCleanedDate?.ToShortDateString() ?? "Not recorded")
+                        <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:1rem;">
+                            <div style="background:#f5f7fa; border-radius:8px; padding:10px 12px;">
+                                <p style="font-size:10px; text-transform:uppercase; letter-spacing:0.08em; color:#888; margin-bottom:2px;">Volume</p>
+                                <p style="font-size:15px; font-weight:600; color:#111; margin:0;">@tank.VolumeLiters L</p>
+                            </div>
+                            <div style="background:#f5f7fa; border-radius:8px; padding:10px 12px;">
+                                <p style="font-size:10px; text-transform:uppercase; letter-spacing:0.08em; color:#888; margin-bottom:2px;">Temp</p>
+                                <p style="font-size:15px; font-weight:600; color:#111; margin:0;">@tank.TemperatureC °C</p>
+                            </div>
+                            <div style="background:#f5f7fa; border-radius:8px; padding:10px 12px;">
+                                <p style="font-size:10px; text-transform:uppercase; letter-spacing:0.08em; color:#888; margin-bottom:2px;">pH</p>
+                                <p style="font-size:15px; font-weight:600; color:#111; margin:0;">@tank.PH</p>
+                            </div>
+                            <div style="background:#f5f7fa; border-radius:8px; padding:10px 12px;">
+                                <p style="font-size:10px; text-transform:uppercase; letter-spacing:0.08em; color:#888; margin-bottom:2px;">Ammonia</p>
+                                <p style="font-size:15px; font-weight:600; color:#111; margin:0;">@tank.Ammonia</p>
+                            </div>
+                        </div>
+
+                        <p style="font-size:12px; color:#888; margin-bottom:0;">
+                            Last cleaned: <strong style="color:#555;">@(tank.LastCleanedDate?.ToShortDateString() ?? "Not recorded")</strong>
                         </p>
+
                     </div>
 
-                    <div class="card-footer bg-white text-end">
-                        <a asp-action="Details" asp-route-id="@tank.Id" class="btn btn-sm btn-outline-secondary">Details</a>
-                        <a asp-action="Edit" asp-route-id="@tank.Id" class="btn btn-sm btn-outline-primary">Edit</a>
+                    <div class="card-footer bg-white text-end" style="border-top:0.5px solid #f0f0f0; border-radius:0 0 12px 12px;">
+                        <a asp-action="Details" asp-route-id="@tank.Id" class="btn btn-sm btn-outline-secondary me-1">Details</a>
+                        <a asp-action="Edit" asp-route-id="@tank.Id" class="btn btn-sm btn-outline-primary me-1">Edit</a>
                         <a asp-action="Delete" asp-route-id="@tank.Id" class="btn btn-sm btn-outline-danger">Delete</a>
                     </div>
-
                 </div>
             </div>
         }
-
     </div>
 
 </div>
