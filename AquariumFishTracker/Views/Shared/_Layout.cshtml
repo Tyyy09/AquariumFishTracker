@@ -8,18 +8,67 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/AquariumFishTracker.styles.css" asp-append-version="true" />
+
+    <style>
+            .aft-nav {
+                background: #042C53;
+                padding: 0 1.5rem;
+            }
+
+            .aft-brand {
+                font-size: 16px;
+                font-weight: 700;
+                color: #5DCAA5 !important;
+                letter-spacing: 0.03em;
+                text-decoration: none;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            }
+
+            .aft-nav .nav-link {
+                color: #B5D4F4 !important;
+                font-size: 13px;
+                font-weight: 500;
+                padding: 1.4rem 1rem !important;
+                border-bottom: 2px solid transparent;
+                transition: color 0.15s, border-color 0.15s;
+            }
+
+                .aft-nav .nav-link:hover {
+                    color: #fff !important;
+                    border-bottom: 2px solid #5DCAA5;
+                }
+
+                .aft-nav .nav-link.active {
+                    color: #fff !important;
+                    border-bottom: 2px solid #5DCAA5;
+                }
+
+            .aft-nav .navbar-toggler {
+                border-color: rgba(255,255,255,0.2);
+            }
+
+            .aft-nav .navbar-toggler-icon {
+                filter: invert(1);
+            }
+
+            .nav-divider {
+                width: 1px;
+                height: 20px;
+                background: rgba(255,255,255,0.1);
+                margin: auto 8px;
+            }
+    </style>
 </head>
 
 <body style="background:#f5f7fa; min-height:100vh; display:flex; flex-direction:column;">
 
     <header>
-        <nav class="navbar navbar-expand-sm navbar-dark mb-3"
-             style="background:#042C53; box-shadow:0 2px 8px rgba(0,0,0,0.15);">
+        <nav class="navbar navbar-expand-sm aft-nav">
             <div class="container-fluid">
 
-                <!-- Brand -->
-                <a class="navbar-brand fw-bold" asp-controller="Home" asp-action="Index"
-                       style="color:#5DCAA5; letter-spacing:0.03em;">
+                <a class="aft-brand" asp-controller="Home" asp-action="Index">
                     AquariumFishTracker
                 </a>
 
@@ -30,31 +79,28 @@
                 </button>
 
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+                    <ul class="navbar-nav flex-grow-1" style="padding-left:1.5rem;">
 
                         <li class="nav-item">
-                            <a class="nav-link" asp-controller="Home" asp-action="Index"
-                               style="color:#B5D4F4;">Home</a>
+                            <a class="nav-link" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" asp-controller="Tanks" asp-action="Index"
-                               style="color:#B5D4F4;">Tanks</a>
+                            <a class="nav-link" asp-controller="Tanks" asp-action="Index">Tanks</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" asp-controller="Fish" asp-action="Index"
-                               style="color:#B5D4F4;">Fish</a>
+                            <a class="nav-link" asp-controller="Fish" asp-action="Index">Fish</a>
+                        </li>
+
+                        <div class="nav-divider"></div>
+
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Home" asp-action="About">About</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" asp-controller="Home" asp-action="About"
-                               style="color:#B5D4F4;">About</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" asp-controller="Home" asp-action="Privacy"
-                               style="color:#B5D4F4;">Privacy</a>
+                            <a class="nav-link" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
 
                     </ul>
@@ -66,7 +112,7 @@
         </nav>
     </header>
 
-    <div class="container flex-grow-1">
+    <div class="container flex-grow-1 mt-4">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
