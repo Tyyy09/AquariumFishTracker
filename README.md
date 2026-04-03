@@ -1,31 +1,69 @@
 # AquariumFishTracker
 
-AquariumFishTracker is a simple ASP.NET Core MVC web application created for **COMP 2084 – Server-Side Scripting**.  
-The purpose of this project is to demonstrate core MVC concepts including:
+AquariumFishTracker is an ASP.NET Core MVC web application created for **COMP 2084 – Server-Side Scripting** at Georgian College.
 
-- Model creation  
-- One-to-many relationships  
-- Controllers and Views  
-- CRUD operations  
-- SQL Server database integration  
+The application allows users to manage aquarium tanks and the fish that live in them, with full authentication and social login support.
+
 ---
 
-## Project Description
+## Live Site
+Coming Soon..
 
-This application allows users to manage **aquarium tanks** and the **fish** that live in them.  
-It includes two main models:
+## Features
 
-### **Tank**
-Represents an aquarium tank with properties such as:
-- Name  
-- Volume (liters)  
-- Temperature  
-- pH and water quality levels  
-- Last cleaned date  
+- Full CRUD operations for Tanks and Fish
+- ASP.NET Core Identity — local registration and login
+- Google OAuth 2.0 social login
+- Authenticated-only access to Create, Edit, and Delete operations
+- Anonymous users can browse tanks and fish but cannot modify data
+- Responsive layout built with Bootstrap
 
-### **Fish**
-Represents a fish that belongs to a specific tank.  
-This creates a **one-to-many relationship**:  
-**One Tank -> Many Fish**
+---
 
-Users can create, view, edit, and delete both tanks and fish.
+## Models
+
+### Tank
+Represents an aquarium tank with properties including name, volume (liters), temperature, pH, ammonia level, and last cleaned date.
+
+### Fish
+Represents a fish belonging to a specific tank, creating a one-to-many relationship:
+**One Tank → Many Fish**
+
+---
+
+## Authentication
+
+### Local Auth
+Users can register and log in with an email and password via ASP.NET Core Identity.
+
+### Google Login
+Social login is enabled via Google OAuth 2.0. The following redirect URIs are registered in Google Cloud Console:
+- `https://localhost:7021/signin-google`
+- `https://yourmonsteraspdomain.com/signin-google`
+
+---
+
+## Tech Stack
+
+- ASP.NET Core 8 MVC
+- Entity Framework Core
+- SQL Server
+- ASP.NET Core Identity
+- Google OAuth 2.0
+- Bootstrap 5
+
+---
+
+## Getting Started
+
+1. Clone the repository
+2. Update `appsettings.json` with your SQL Server connection string and Google OAuth keys
+3. Run migrations: `Update-Database -Context ApplicationDbContext`
+4. Run the app and register an account at `/Identity/Account/Register`
+
+---
+
+## Author
+
+**Ichty Te** — Student #200626964  
+COMP 2084 – Server-Side Scripting | Georgian College
