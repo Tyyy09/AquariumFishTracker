@@ -1,22 +1,175 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap');
+
+:root {
+    --navy: #042C53;
+    --navy-mid: #185FA5;
+    --teal: #5DCAA5;
+    --teal-light: #E1F5EE;
+    --teal-dark: #0F6E56;
+    --sky: #B5D4F4;
+    --bg: #F4F7FB;
+    --surface: #FFFFFF;
+    --text: #111827;
+    --muted: #6B7280;
+    --border: #E5E9F0;
+    --danger-bg: #FCEBEB;
+    --danger: #A32D2D;
+}
+
 html {
-  font-size: 14px;
+    font-size: 15px;
+    position: relative;
+    min-height: 100%;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
+    html {
+        font-size: 16px;
+    }
 }
 
 body {
-  margin-bottom: 60px;
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    margin-bottom: 60px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    color: var(--navy);
+}
+
+code, pre, .font-mono {
+    font-family: 'DM Mono', monospace;
+}
+
+a {
+    color: var(--navy-mid);
+    text-decoration: none;
+}
+
+    a:hover {
+        color: var(--teal-dark);
+    }
+
+/* Buttons */
+.btn-primary {
+    background: var(--navy);
+    border-color: var(--navy);
+    color: #fff;
+    font-weight: 600;
+    border-radius: 8px;
+}
+
+    .btn-primary:hover {
+        background: var(--navy-mid);
+        border-color: var(--navy-mid);
+    }
+
+.btn-success {
+    background: var(--teal-dark);
+    border-color: var(--teal-dark);
+    font-weight: 600;
+    border-radius: 8px;
+}
+
+    .btn-success:hover {
+        background: var(--teal);
+        border-color: var(--teal);
+        color: var(--navy);
+    }
+
+.btn-outline-primary {
+    color: var(--navy-mid);
+    border-color: var(--navy-mid);
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+    .btn-outline-primary:hover {
+        background: var(--navy-mid);
+        color: #fff;
+    }
+
+.btn-outline-danger {
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+.btn-outline-secondary {
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+/* Focus rings */
+.btn:focus,
+.btn:active:focus,
+.btn-link.nav-link:focus,
+.form-control:focus,
+.form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem var(--teal);
+}
+
+/* Cards */
+.card {
+    border-radius: 12px;
+    border: none;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+}
+
+/* Forms */
+.form-control {
+    border-radius: 8px;
+    border-color: var(--border);
+    font-family: 'DM Sans', sans-serif;
+}
+
+    .form-control:focus {
+        border-color: var(--teal);
+    }
+
+.form-label {
+    font-weight: 500;
+    color: var(--text);
+    font-size: 14px;
+}
+
+/* Tables */
+.table {
+    font-family: 'DM Sans', sans-serif;
+}
+
+/* Badges / pills */
+.badge-clean {
+    background: var(--teal-light);
+    color: var(--teal-dark);
+    font-size: 12px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-weight: 500;
+}
+
+.badge-warn {
+    background: var(--danger-bg);
+    color: var(--danger);
+    font-size: 12px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-weight: 500;
+}
+
+/* Page titles */
+.page-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 0;
+}
+
+.page-subtitle {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 0;
 }

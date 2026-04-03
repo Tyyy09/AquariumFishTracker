@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<AquariumFishTracker.Models.Fish>
+@inject Microsoft.AspNetCore.Identity.SignInManager<Microsoft.AspNetCore.Identity.IdentityUser> SignInManager
 
 @{
     ViewData["Title"] = "Fish";
@@ -11,7 +12,10 @@
             <h1 class="fw-bold mb-0">Fish</h1>
             <p class="text-muted mb-0" style="font-size:13px;">All fish across your tanks</p>
         </div>
-        <a asp-action="Create" class="btn btn-success">+ Add Fish</a>
+        @if (SignInManager.IsSignedIn(User))
+        {
+            <a asp-action="Create" class="btn btn-success">+ Add Fish</a>
+        }
     </div>
 
     <div class="card border-0 shadow-sm">
@@ -44,8 +48,11 @@
                             <td style="padding:14px 16px; color:#888; font-size:13px;">@fish.DateAdded.ToShortDateString()</td>
                             <td style="padding:14px 16px; text-align:right;">
                                 <a asp-action="Details" asp-route-id="@fish.Id" class="btn btn-sm btn-outline-secondary me-1">Details</a>
-                                <a asp-action="Edit" asp-route-id="@fish.Id" class="btn btn-sm btn-outline-primary me-1">Edit</a>
-                                <a asp-action="Delete" asp-route-id="@fish.Id" class="btn btn-sm btn-outline-danger">Delete</a>
+                                @if (SignInManager.IsSignedIn(User))
+                                {
+                                    <a asp-action="Edit" asp-route-id="@fish.Id" class="btn btn-sm btn-outline-primary me-1">Edit</a>
+                                    <a asp-action="Delete" asp-route-id="@fish.Id" class="btn btn-sm btn-outline-danger">Delete</a>
+                                }
                             </td>
                         </tr>
                     }

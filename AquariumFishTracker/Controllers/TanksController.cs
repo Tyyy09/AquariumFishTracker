@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AquariumFishTracker.Data;
 using AquariumFishTracker.Models;
@@ -14,19 +15,19 @@ namespace AquariumFishTracker.Controllers
             _context = context;
         }
 
-        // GET: Tanks
+        // GET: Tanks — PUBLIC
         public async Task<IActionResult> Index()
         {
             return View(await _context.Tanks.ToListAsync());
         }
 
-        // GET: Tanks/Details/5
+        // GET: Tanks/Details/5 — PUBLIC
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null) return NotFound();
 
             var tank = await _context.Tanks
-                .Include(t => t.Fish) // show fish inside tank
+                .Include(t => t.Fish)
                 .FirstOrDefaultAsync(m => m.Id == id);
 
             if (tank == null) return NotFound();
@@ -34,16 +35,17 @@ namespace AquariumFishTracker.Controllers
             return View(tank);
         }
 
-        // GET: Tanks/Create
+        // GET: Tanks/Create — PRIVATE
+        [Authorize]
         public IActionResult Create()
         {
             ViewData["Title"] = "Create Tank";
             ViewData["Action"] = "Create";
-
             return View();
         }
 
-        // POST: Tanks/Create
+        // POST: Tanks/Create — PRIVATE
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Tank tank)
@@ -57,11 +59,11 @@ namespace AquariumFishTracker.Controllers
 
             ViewData["Title"] = "Create Tank";
             ViewData["Action"] = "Create";
-
             return View(tank);
         }
 
-        // GET: Tanks/Edit/5
+        // GET: Tanks/Edit/5 — PRIVATE
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null) return NotFound();
@@ -71,11 +73,11 @@ namespace AquariumFishTracker.Controllers
 
             ViewData["Title"] = "Edit Tank";
             ViewData["Action"] = "Edit";
-
             return View(tank);
         }
 
-        // POST: Tanks/Edit/5
+        // POST: Tanks/Edit/5 — PRIVATE
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Tank tank)
@@ -94,17 +96,16 @@ namespace AquariumFishTracker.Controllers
                     if (!TankExists(tank.Id)) return NotFound();
                     throw;
                 }
-
                 return RedirectToAction(nameof(Index));
             }
 
             ViewData["Title"] = "Edit Tank";
             ViewData["Action"] = "Edit";
-
             return View(tank);
         }
 
-        // GET: Tanks/Delete/5
+        // GET: Tanks/Delete/5 — PRIVATE
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null) return NotFound();
@@ -117,19 +118,18 @@ namespace AquariumFishTracker.Controllers
             return View(tank);
         }
 
-        // POST: Tanks/Delete/5
+        // POST: Tanks/Delete/5 — PRIVATE
+        [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var tank = await _context.Tanks.FindAsync(id);
-
             if (tank != null)
             {
                 _context.Tanks.Remove(tank);
                 await _context.SaveChangesAsync();
             }
-
             return RedirectToAction(nameof(Index));
         }
 

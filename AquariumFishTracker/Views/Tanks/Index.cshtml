@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<AquariumFishTracker.Models.Tank>
+@inject Microsoft.AspNetCore.Identity.SignInManager<Microsoft.AspNetCore.Identity.IdentityUser> SignInManager
 
 @{
     ViewData["Title"] = "Tanks";
@@ -11,13 +12,15 @@
             <h1 class="fw-bold mb-0">Tanks</h1>
             <p class="text-muted mb-0" style="font-size:13px;">All registered aquarium tanks</p>
         </div>
-        <a asp-action="Create" class="btn btn-success">+ Add Tank</a>
+        @if (SignInManager.IsSignedIn(User))
+        {
+            <a asp-action="Create" class="btn btn-success">+ Add Tank</a>
+        }
     </div>
 
     <div class="row g-3">
         @foreach (var tank in Model)
         {
-            <!-- cleaning badge logic: flagged if null or older than 14 days -->
             var needsCleaning = tank.LastCleanedDate == null || tank.LastCleanedDate < DateTime.Now.AddDays(-14);
 
             <div class="col-md-4">
@@ -63,8 +66,11 @@
 
                     <div class="card-footer bg-white text-end" style="border-top:0.5px solid #f0f0f0; border-radius:0 0 12px 12px;">
                         <a asp-action="Details" asp-route-id="@tank.Id" class="btn btn-sm btn-outline-secondary me-1">Details</a>
-                        <a asp-action="Edit" asp-route-id="@tank.Id" class="btn btn-sm btn-outline-primary me-1">Edit</a>
-                        <a asp-action="Delete" asp-route-id="@tank.Id" class="btn btn-sm btn-outline-danger">Delete</a>
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                            <a asp-action="Edit" asp-route-id="@tank.Id" class="btn btn-sm btn-outline-primary me-1">Edit</a>
+                            <a asp-action="Delete" asp-route-id="@tank.Id" class="btn btn-sm btn-outline-danger">Delete</a>
+                        }
                     </div>
                 </div>
             </div>

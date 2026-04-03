@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AquariumFishTracker.Data;
 using AquariumFishTracker.Models;
-// This controller manages CRUD operations for Fish entities, including listing, creating, editing, and deleting fish records. It also handles the association between fish and their respective tanks.
+
 namespace AquariumFishTracker.Controllers
 {
     public class FishController : Controller
@@ -15,14 +17,14 @@ namespace AquariumFishTracker.Controllers
             _context = context;
         }
 
-        // GET: Fish
+        // GET: Fish — PUBLIC, anyone can view the list
         public async Task<IActionResult> Index()
         {
             var fishList = _context.Fish.Include(f => f.Tank);
             return View(await fishList.ToListAsync());
         }
 
-        // GET: Fish/Details/5
+        // GET: Fish/Details/5 — PUBLIC
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null) return NotFound();
@@ -36,17 +38,22 @@ namespace AquariumFishTracker.Controllers
             return View(fish);
         }
 
-        // GET: Fish/Create
+        // GET: Fish/Create — PRIVATE
+
+        [Authorize]
+
         public IActionResult Create()
         {
             ViewData["Title"] = "Create Fish";
             ViewData["Action"] = "Create";
-
             ViewData["TankId"] = new SelectList(_context.Tanks, "Id", "Name");
             return View();
         }
 
-        // POST: Fish/Create
+        // POST: Fish/Create — PRIVATE
+
+        [Authorize]
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Fish fish)
@@ -62,11 +69,13 @@ namespace AquariumFishTracker.Controllers
             ViewData["Title"] = "Create Fish";
             ViewData["Action"] = "Create";
             ViewData["TankId"] = new SelectList(_context.Tanks, "Id", "Name", fish.TankId);
-
             return View(fish);
         }
 
-        // GET: Fish/Edit/5
+        // GET: Fish/Edit/5 — PRIVATE
+
+        [Authorize]
+
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null) return NotFound();
@@ -77,11 +86,13 @@ namespace AquariumFishTracker.Controllers
             ViewData["Title"] = "Edit Fish";
             ViewData["Action"] = "Edit";
             ViewData["TankId"] = new SelectList(_context.Tanks, "Id", "Name", fish.TankId);
-
             return View(fish);
         }
 
-        // POST: Fish/Edit/5
+        // POST: Fish/Edit/5 — PRIVATE
+
+        [Authorize]
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Fish fish)
@@ -106,11 +117,13 @@ namespace AquariumFishTracker.Controllers
             ViewData["Title"] = "Edit Fish";
             ViewData["Action"] = "Edit";
             ViewData["TankId"] = new SelectList(_context.Tanks, "Id", "Name", fish.TankId);
-
             return View(fish);
         }
 
-        // GET: Fish/Delete/5
+        // GET: Fish/Delete/5 — PRIVATE
+
+        [Authorize]
+
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null) return NotFound();
@@ -124,7 +137,10 @@ namespace AquariumFishTracker.Controllers
             return View(fish);
         }
 
-        // POST: Fish/Delete/5
+        // POST: Fish/Delete/5 — PRIVATE
+
+        [Authorize]
+
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -135,7 +151,6 @@ namespace AquariumFishTracker.Controllers
                 _context.Fish.Remove(fish);
                 await _context.SaveChangesAsync();
             }
-
             return RedirectToAction(nameof(Index));
         }
 
