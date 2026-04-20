@@ -9,9 +9,10 @@ namespace AquariumFishTracker.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly AquariumContext _context;
+        // Logic: Swapped to the unified ApplicationDbContext
+        private readonly ApplicationDbContext _context;
 
-        public HomeController(ILogger<HomeController> logger, AquariumContext context)
+        public HomeController(ILogger<HomeController> logger, ApplicationDbContext context)
         {
             _logger = logger;
             _context = context;
@@ -20,6 +21,7 @@ namespace AquariumFishTracker.Controllers
         // Dashboard
         public async Task<IActionResult> Index()
         {
+            // Optimization: These are now executing against the unified Identity/App database
             ViewBag.TotalFish = await _context.Fish.CountAsync();
             ViewBag.TotalTanks = await _context.Tanks.CountAsync();
 
@@ -27,24 +29,25 @@ namespace AquariumFishTracker.Controllers
                 ? await _context.Tanks.AverageAsync(t => t.PH)
                 : 0;
 
+            // Analysis: DateTime.Now in a query can prevent plan caching in some SQL versions.
+            // Using a variable is more stable.
+            var cleaningThreshold = DateTime.Now.AddDays(-14);
             ViewBag.TanksNeedingCleaning = await _context.Tanks
-                .Where(t => t.LastCleanedDate == null || t.LastCleanedDate < DateTime.Now.AddDays(-14))
+                .Where(t => t.LastCleanedDate == null || t.LastCleanedDate < cleaningThreshold)
                 .CountAsync();
 
             return View();
         }
 
-        // Static pages
         public IActionResult Privacy() => View();
         public IActionResult About() => View();
 
-        // Error handler
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
-            return View(new ErrorViewModel 
-            { 
-                RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier 
+            return View(new ErrorViewModel
+            {
+                RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
             });
         }
     }

@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AquariumFishTracker.Migrations
 {
-    [DbContext(typeof(AquariumContext))]
+    [DbContext(typeof(ApplicationDbContext))]
     partial class AquariumContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

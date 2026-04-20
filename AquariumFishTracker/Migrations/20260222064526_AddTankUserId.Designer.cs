@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AquariumFishTracker.Migrations
 {
-    [DbContext(typeof(AquariumContext))]
+    [DbContext(typeof(ApplicationDbContext))]
     [Migration("20260222064526_AddTankUserId")]
     partial class AddTankUserId
     {

@@ -1,13 +1,16 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using AquariumFishTracker.Models;
 
-namespace AquariumFishTracker.Data
+namespace AquariumFishTracker.Data;
+
+public class ApplicationDbContext : IdentityDbContext
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        : base(options)
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-            : base(options)
-        {
-        }
     }
+
+    public DbSet<Fish> Fish { get; set; }
+    public DbSet<Tank> Tanks { get; set; }
 }

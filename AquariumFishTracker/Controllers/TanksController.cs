@@ -8,9 +8,9 @@ namespace AquariumFishTracker.Controllers
 {
     public class TanksController : Controller
     {
-        private readonly AquariumContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public TanksController(AquariumContext context)
+        public TanksController(ApplicationDbContext context)
         {
             _context = context;
         }
